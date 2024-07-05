@@ -74,6 +74,22 @@ function reserve(day, time) {
 }
 
 
+// Function for reserving 
+
+let reserveButton = document.getElementById("reserve");
+reserveButton.addEventListener("click", ()=> {
+    let day = document.getElementById("day").value
+    let time = document.querySelector('input[name="time"]:checked').value
+    reserve(day, time)
+    if (day == "today") {
+        slots = todaySlots;
+    } else if (day == "tomorrow") {
+        slots = tomorrowSlots;
+    } else {
+        slots = datSlots;
+    }
+    slots[time-1] = false
+})
 
 
 
