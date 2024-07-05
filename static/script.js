@@ -1,4 +1,4 @@
-// Set date options
+// Set date
 
 let todayOption = document.getElementById("today")
 let tomorrowOption = document.getElementById("tomorrow")
@@ -10,15 +10,6 @@ tomorrowDate.setDate(currentDate.getDate() + 1);
 
 let datDate = new Date(currentDate);
 datDate.setDate(datDate.getDate() + 2);
-    
-let options = { year: 'numeric', month: 'long', day: 'numeric' };
-currentDate = currentDate.toLocaleDateString(undefined, options);
-tomorrowDate = tomorrowDate.toLocaleDateString(undefined, options);
-datDate = datDate.toLocaleDateString(undefined, options);
-
-todayOption.innerHTML = currentDate
-tomorrowOption.innerHTML = tomorrowDate
-datOption.innerHTML = datDate
 
 
 // Database for available slots
@@ -27,6 +18,29 @@ let todaySlots = [true, false, true, true, true, false, false, true, true, false
 let tomorrowSlots = [false, false, true, false, true, false, false, true, false, false, false, false]
 let datSlots = [false, false, false, true, false, false, false, true, false, false, false, false]
 let times = ["11.00-12.00", "12.00-13.00", "13.00-14.00", "14.00-15.00", "15.00-16.00", "16.00-17.00", "17.00-18.00", "18.00-19.00", "20.00-21.00", "21.00-22.00"]
+
+
+// restriction untuk hari libur (senin dan minggu)
+
+if (currentDate.getDay() == 0 || currentDate.getDay() == 1) {
+    todaySlots = [false, false, false, false, false, false, false, false, false, false, false, false]
+} else if (tomorrowDate.getDay() == 0 || tomorrowDate.getDay() == 1) {
+    tomorrowSlots = [false, false, false, false, false, false, false, false, false, false, false, false]
+} else if (datDate.getDay() == 0 || datDate.getDay() == 1) {
+    datSlots = [false, false, false, false, false, false, false, false, false, false, false, false]
+}
+
+
+// Setting inner HTML options
+
+let options = { year: 'numeric', month: 'long', day: 'numeric' };
+currentDate = currentDate.toLocaleDateString(undefined, options);
+tomorrowDate = tomorrowDate.toLocaleDateString(undefined, options);
+datDate = datDate.toLocaleDateString(undefined, options);
+
+todayOption.innerHTML = currentDate
+tomorrowOption.innerHTML = tomorrowDate
+datOption.innerHTML = datDate
 
 
 // Function for showing time selections
